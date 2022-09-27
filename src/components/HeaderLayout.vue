@@ -56,10 +56,7 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                <a class="button is-primary">
-                  <strong>Sign up</strong>
-                </a>
-                <a class="button is-light"> Log in </a>
+                <a class="button is-danger" @click="logout"> Logout </a>
               </div>
             </div>
           </div>
@@ -74,6 +71,11 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useStore } from "@/store";
+import { useRouter } from "vue-router";
+
+const store = useStore();
+const router = useRouter();
 
 let HamburgActive = ref(false);
 
@@ -82,5 +84,12 @@ const showMenu = () => {
 };
 const hideMenu = () => {
   HamburgActive.value = false;
+};
+
+const logout = () => {
+  store.commit("logout");
+  router.push({
+    name: "Login",
+  });
 };
 </script>

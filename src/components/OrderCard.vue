@@ -6,6 +6,10 @@
           Nome: <strong>{{ props.orderInfo?.name }}</strong>
         </h1>
       </div>
+
+      <div class="column">
+        Contato: <strong>{{ orderInfo?.phone }}</strong>
+      </div>
       <div class="column">
         Status: <strong>{{ orderInfo?.status }}</strong>
       </div>
@@ -15,7 +19,10 @@
         Endereço: <strong>{{ orderInfo?.address }}</strong>
       </div>
       <div class="column">
-        Contato: <strong>{{ orderInfo?.phone }}</strong>
+        Entrega: <strong>{{ orderInfo?.delivery_date }}</strong>
+      </div>
+      <div class="column">
+        Data: <strong>{{ orderInfo?.create_at }}</strong>
       </div>
     </div>
     <hr />

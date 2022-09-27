@@ -59,7 +59,16 @@ const user = {
 };
 
 const login = () => {
-  console.log(user);
+  store
+    .dispatch("login", user)
+    .then(() => {
+      router.push({
+        name: "Home",
+      });
+    })
+    .catch(() => {
+      user.password = "";
+    });
 };
 </script>
 

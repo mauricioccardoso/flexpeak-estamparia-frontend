@@ -16,6 +16,8 @@ const orderInfo = {
   status: "Pedido Realizado",
   address: "Rua imaginação",
   phone: "(92) 99999-9999",
+  create_at: "10/02/2022",
+  delivery_date: "10/03/2022",
   items: [
     {
       name: "Camisa",

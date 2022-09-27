@@ -99,7 +99,14 @@ const user = {
 };
 
 const register = () => {
-  console.log(user);
+  store
+    .dispatch("register", user)
+    .then(() => {
+      router.push({
+        name: "Home",
+      });
+    })
+    .catch(() => {});
 };
 </script>
 
