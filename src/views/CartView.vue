@@ -67,4 +67,3 @@ const createOrder = () => {
 };
 </script>
 
-<style scoped></style>

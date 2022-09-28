@@ -35,21 +35,21 @@
               :to="{ name: 'Home' }"
               @click="hideMenu"
             >
-              Home
+              <h1 class="title is-5">Home</h1>
             </router-link>
             <router-link
               class="navbar-item"
               :to="{ name: 'Cart' }"
               @click="hideMenu"
             >
-              Carrinho
+              <h1 class="title is-5">Carrinho</h1>
             </router-link>
             <router-link
               class="navbar-item"
               :to="{ name: 'Orders' }"
               @click="hideMenu"
             >
-              Pedidos
+              <h1 class="title is-5">Pedidos</h1>
             </router-link>
           </div>
 
@@ -93,3 +93,9 @@ const logout = () => {
   });
 };
 </script>
+
+<style scoped>
+.navbar-start .navbar-item:hover {
+  background-color: #00d1b2;
+}
+</style>

@@ -75,7 +75,6 @@ const decrement = () => {
   }
 };
 
-//
 const addToCart = () => {
   store.commit("addToCart", {
     id: product.id,

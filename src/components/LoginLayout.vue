@@ -37,6 +37,7 @@
             <i class="fa-solid fa-lock"></i>
           </span>
         </div>
+        <p class="help is-danger" v-if="msg">Email e/ou senha inválidos</p>
       </div>
       <button type="submit" class="button is-primary is-pulled-right">
         Entrar
@@ -58,17 +59,20 @@ const user = ref({
   password: "",
 });
 
+let msg = ref();
+
 const login = () => {
-  store
-    .dispatch("login", user.value)
-    .then(() => {
-      router.push({
-        name: "Home",
-      });
-    })
-    .catch(() => {
+  store.dispatch("login", user.value).then((error) => {
+    if (error) {
+      msg.value = error;
       user.value.password = "";
+      return;
+    }
+
+    router.push({
+      name: "Home",
     });
+  });
 };
 </script>
 

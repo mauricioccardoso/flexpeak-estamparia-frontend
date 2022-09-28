@@ -24,16 +24,20 @@ export const store = createStore<State>({
   },
   actions: {
     register({ commit }, user) {
-      return httpClient.post("/register", user).then(({ data }) => {
-        commit("setUser", data);
-        return data;
-      });
+      return httpClient
+        .post("/register", user)
+        .then(({ data }) => {
+          commit("setUser", data);
+        })
+        .catch(({ response }) => response.data.errors);
     },
     login({ commit }, user) {
-      return httpClient.post("/login", user).then(({ data }) => {
-        commit("setUser", data);
-        return data;
-      });
+      return httpClient
+        .post("/login", user)
+        .then(({ data }) => {
+          commit("setUser", data);
+        })
+        .catch(({ response }) => response.data);
     },
     createOrder({ commit }, data) {
       httpClient.post("/orders", data).then(() => {

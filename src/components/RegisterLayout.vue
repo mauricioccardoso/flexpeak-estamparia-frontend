@@ -12,14 +12,20 @@
       <div class="field">
         <label class="label">Nome</label>
         <div class="control">
-          <input class="input" type="text" v-model="user.name" />
+          <input class="input" type="text" v-model="user.name" required />
         </div>
+        <p class="help is-danger" v-if="msgs?.name">
+          Nome deve conter 3 ou mais caracteres!
+        </p>
       </div>
       <div class="field">
         <label class="label">Endereço</label>
         <div class="control">
-          <input class="input" type="text" v-model="user.address" />
+          <input class="input" type="text" v-model="user.address" required />
         </div>
+        <p class="help is-danger" v-if="msgs?.address">
+          Endereço deve conter 5 ou mais caracteres!
+        </p>
       </div>
       <div class="field">
         <label class="label">Contato</label>
@@ -29,7 +35,11 @@
             type="tel"
             placeholder="(XX) XXXXX-XXXX"
             v-model="user.phone"
+            required
           />
+          <p class="help is-danger" v-if="msgs?.phone">
+            Contato deve conter o ddd e o número!
+          </p>
         </div>
       </div>
       <div class="field">
@@ -45,7 +55,7 @@
             <i class="fas fa-envelope"></i>
           </span>
         </div>
-        <!-- <p class="help is-danger">This email is invalid</p> -->
+        <p class="help is-danger" v-if="msgs?.email">Email inválido</p>
       </div>
       <div class="field">
         <label class="label">Senha</label>
@@ -55,6 +65,10 @@
             <i class="fa-solid fa-lock"></i>
           </span>
         </div>
+
+        <p class="help is-danger" v-if="msgs?.email">
+          Senha inválida. A Senha deve ter no mínimo 8 caracteres.
+        </p>
         <p class="help is-info">
           <i class="fa-solid fa-circle-exclamation"></i>
           Letras maiúsculas, minúsculas, caracteres especiais e número.
@@ -72,6 +86,9 @@
             <i class="fa-solid fa-lock"></i>
           </span>
         </div>
+        <p class="help is-danger" v-if="msgPassConfirme">
+          Senhas devem ser idênticas!
+        </p>
       </div>
 
       <button type="submit" class="button is-primary is-pulled-right">
@@ -83,6 +100,7 @@
 
 <script setup lang="ts">
 import { useStore } from "@/store";
+import { onUpdated, ref } from "vue";
 import { useRouter } from "vue-router";
 
 const store = useStore();
@@ -97,15 +115,29 @@ const user = {
   password_confirmation: "",
 };
 
+let msgs = ref();
+let msgPassConfirme = ref(false);
+
 const register = () => {
-  store
-    .dispatch("register", user)
-    .then(() => {
-      router.push({
-        name: "Home",
-      });
-    })
-    .catch(() => {});
+  store.dispatch("register", user).then((errors) => {
+    if (errors) {
+      msgs.value = errors;
+      confirmation();
+      return;
+    }
+
+    router.push({
+      name: "Home",
+    });
+  });
+};
+
+const confirmation = () => {
+  if (msgs.value.password[0].includes("password confirmation")) {
+    msgPassConfirme.value = true;
+  } else {
+    msgPassConfirme.value = false;
+  }
 };
 </script>
 

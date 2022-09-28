@@ -22,7 +22,14 @@
         Entrega: <strong>{{ orderInfo?.delivery_date }}</strong>
       </div>
       <div class="column">
-        Data: <strong>{{ orderInfo?.created_at }}</strong>
+        Data:
+        <strong class="mr-1">
+          {{ new Date(orderInfo?.created_at).toLocaleTimeString("pt-BR") }}
+        </strong>
+        <strong>-</strong>
+        <strong class="ml-1">
+          {{ new Date(orderInfo?.created_at).toLocaleDateString("pt-BR") }}
+        </strong>
       </div>
     </div>
     <hr />
@@ -52,6 +59,6 @@ const user = store.state.user;
 
 <style scoped>
 .card {
-  background-color: rgba(95, 199, 135, 0.486);
+  background-color: #00d1b2;
 }
 </style>
