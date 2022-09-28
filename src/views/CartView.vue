@@ -5,7 +5,11 @@
       <i class="fa-solid fa-arrow-left mr-2"></i>
       <strong>Voltar</strong>
     </router-link>
-    <button class="button is-primary" :disabled="orderDisabled">
+    <button
+      class="button is-primary"
+      :disabled="orderDisabled"
+      @click="createOrder"
+    >
       <strong class="mr-3">Finalizar Pedido</strong>
       <i class="fa-solid fa-gifts"></i>
     </button>
@@ -22,9 +26,13 @@
 </template>
 
 <script setup lang="ts">
-import { store } from "@/store";
+import { useStore } from "@/store";
 import { onBeforeMount, onUpdated, ref } from "vue";
+import { useRouter } from "vue-router";
 import CartCard from "../components/CartCard.vue";
+
+const store = useStore();
+const router = useRouter();
 
 let products = ref();
 let orderDisabled = ref(true);
@@ -45,6 +53,18 @@ onBeforeMount(() => {
 onUpdated(() => {
   orderDisabledFunction();
 });
+
+const createOrder = () => {
+  let order = {
+    user_id: store.state.user?.id,
+    items: products.value,
+  };
+  store.dispatch("createOrder", order).then(() => {
+    router.push({
+      name: "Home",
+    });
+  });
+};
 </script>
 
 <style scoped></style>

@@ -23,7 +23,6 @@
             <i class="fas fa-envelope"></i>
           </span>
         </div>
-        <!-- <p class="help is-danger">This email is invalid</p> -->
       </div>
       <div class="field">
         <label class="label">Senha</label>
@@ -48,26 +47,27 @@
 
 <script setup lang="ts">
 import { useStore } from "@/store";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const store = useStore();
 const router = useRouter();
 
-const user = {
+const user = ref({
   email: "",
   password: "",
-};
+});
 
 const login = () => {
   store
-    .dispatch("login", user)
+    .dispatch("login", user.value)
     .then(() => {
       router.push({
         name: "Home",
       });
     })
     .catch(() => {
-      user.password = "";
+      user.value.password = "";
     });
 };
 </script>

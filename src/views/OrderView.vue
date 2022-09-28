@@ -5,32 +5,23 @@
     <strong>Voltar</strong>
   </router-link>
 
-  <OrderCard :orderInfo="orderInfo" />
+  <div v-for="order in orderData" :key="order.id">
+    <OrderCard :orderInfo="order" />
+  </div>
 </template>
 
 <script setup lang="ts">
+import { useStore } from "@/store";
+import { onMounted, ref } from "vue";
 import OrderCard from "../components/OrderCard.vue";
 
-const orderInfo = {
-  name: "Maria",
-  status: "Pedido Realizado",
-  address: "Rua imaginação",
-  phone: "(92) 99999-9999",
-  create_at: "10/02/2022",
-  delivery_date: "10/03/2022",
-  items: [
-    {
-      name: "Camisa",
-      quantity: 14,
-    },
-    {
-      name: "Camisa",
-      quantity: 14,
-    },
-    {
-      name: "Camisa",
-      quantity: 14,
-    },
-  ],
-};
+const store = useStore();
+
+let orderData = ref();
+
+onMounted(() => {
+  store.dispatch("getUserData").then((data) => {
+    orderData.value = data;
+  });
+});
 </script>

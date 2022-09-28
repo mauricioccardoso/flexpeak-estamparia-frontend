@@ -74,7 +74,6 @@
         </div>
       </div>
 
-      <!-- button -->
       <button type="submit" class="button is-primary is-pulled-right">
         Criar conta
       </button>

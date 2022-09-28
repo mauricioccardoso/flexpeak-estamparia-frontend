@@ -3,26 +3,26 @@
     <div class="columns">
       <div class="column">
         <h1>
-          Nome: <strong>{{ props.orderInfo?.name }}</strong>
+          Nome: <strong>{{ user?.name }}</strong>
         </h1>
       </div>
 
       <div class="column">
-        Contato: <strong>{{ orderInfo?.phone }}</strong>
+        Contato: <strong>{{ user?.phone }}</strong>
       </div>
       <div class="column">
-        Status: <strong>{{ orderInfo?.status }}</strong>
+        Status: <strong>{{ orderInfo?.order_status }}</strong>
       </div>
     </div>
     <div class="columns">
       <div class="column">
-        Endereço: <strong>{{ orderInfo?.address }}</strong>
+        Endereço: <strong>{{ user?.address }}</strong>
       </div>
       <div class="column">
         Entrega: <strong>{{ orderInfo?.delivery_date }}</strong>
       </div>
       <div class="column">
-        Data: <strong>{{ orderInfo?.create_at }}</strong>
+        Data: <strong>{{ orderInfo?.created_at }}</strong>
       </div>
     </div>
     <hr />
@@ -39,9 +39,19 @@
 </template>
 
 <script setup lang="ts">
+import { store } from "@/store";
+
 const props = defineProps({
   orderInfo: {
     type: Object,
   },
 });
+
+const user = store.state.user;
 </script>
+
+<style scoped>
+.card {
+  background-color: rgba(95, 199, 135, 0.486);
+}
+</style>
