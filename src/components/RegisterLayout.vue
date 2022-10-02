@@ -50,6 +50,7 @@
             type="email"
             placeholder="example@mail.com"
             v-model="user.email"
+            required
           />
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
@@ -60,7 +61,12 @@
       <div class="field">
         <label class="label">Senha</label>
         <div class="control has-icons-left">
-          <input class="input" type="password" v-model="user.password" />
+          <input
+            class="input"
+            type="password"
+            v-model="user.password"
+            required
+          />
           <span class="icon is-small is-left">
             <i class="fa-solid fa-lock"></i>
           </span>
@@ -81,6 +87,7 @@
             class="input"
             type="password"
             v-model="user.password_confirmation"
+            required
           />
           <span class="icon is-small is-left">
             <i class="fa-solid fa-lock"></i>
@@ -100,7 +107,7 @@
 
 <script setup lang="ts">
 import { useStore } from "@/store";
-import { onUpdated, ref } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const store = useStore();

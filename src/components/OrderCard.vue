@@ -19,7 +19,10 @@
         Endereço: <strong>{{ user?.address }}</strong>
       </div>
       <div class="column">
-        Entrega: <strong>{{ orderInfo?.delivery_date }}</strong>
+        Entrega:
+        <strong>{{
+          orderInfo?.delivery_date || "Aguardando confirmação"
+        }}</strong>
       </div>
       <div class="column">
         Data:

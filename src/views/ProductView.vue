@@ -60,7 +60,7 @@ const props = defineProps({
   },
 });
 
-let product = null;
+let product: any = null;
 
 if (props.id) {
   let productD = productData.find((product) => product.id == props.id);
@@ -68,7 +68,12 @@ if (props.id) {
 }
 
 const quantity = ref(0);
-const increment = () => quantity.value++;
+const increment = () => {
+  if (quantity.value < 0) {
+    quantity.value = 0;
+  }
+  quantity.value++;
+};
 const decrement = () => {
   if (quantity.value > 0) {
     quantity.value--;

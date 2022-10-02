@@ -26,15 +26,16 @@
 </template>
 
 <script setup lang="ts">
+import type { ICartItems } from "@/interfaces/ICartItems";
 import { useStore } from "@/store";
-import { onBeforeMount, onUpdated, ref } from "vue";
+import { onBeforeMount, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import CartCard from "../components/CartCard.vue";
 
 const store = useStore();
 const router = useRouter();
 
-let products = ref();
+let products = ref([] as ICartItems[]);
 let orderDisabled = ref(true);
 
 const orderDisabledFunction = () => {
@@ -50,9 +51,12 @@ onBeforeMount(() => {
   orderDisabledFunction();
 });
 
-onUpdated(() => {
-  orderDisabledFunction();
-});
+watch(
+  () => store.state.cart.length,
+  () => {
+    orderDisabledFunction();
+  }
+);
 
 const createOrder = () => {
   let order = {
@@ -66,4 +70,3 @@ const createOrder = () => {
   });
 };
 </script>
-
