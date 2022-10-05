@@ -12,7 +12,13 @@
       <div class="field">
         <label class="label">Nome</label>
         <div class="control">
-          <input class="input" type="text" v-model="user.name" required />
+          <input
+            class="input"
+            type="text"
+            v-model="user.name"
+            required
+            v-focus
+          />
         </div>
         <p class="help is-danger" v-if="msgs?.name">
           Nome deve conter 3 ou mais caracteres!
@@ -112,6 +118,9 @@ import { useRouter } from "vue-router";
 
 const store = useStore();
 const router = useRouter();
+const vFocus = {
+  mounted: (el: any) => el.focus(),
+};
 
 const user = {
   name: "",

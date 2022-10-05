@@ -1,4 +1,6 @@
-export const productData = [
+import type { IProductData } from "@/interfaces/IProductData";
+
+export const productData: IProductData[] = [
   {
     id: "1",
     name: "Caneta 1",

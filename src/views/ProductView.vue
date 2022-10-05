@@ -50,6 +50,7 @@ import ProductCard from "../components/ProductCard.vue";
 import { productData } from "@/data/productData";
 import { useStore } from "@/store";
 import { useRouter } from "vue-router";
+import type { IProductData } from "@/interfaces/IProductData";
 
 const store = useStore();
 const router = useRouter();
@@ -60,11 +61,11 @@ const props = defineProps({
   },
 });
 
-let product: any = null;
+let product: IProductData;
 
 if (props.id) {
   let productD = productData.find((product) => product.id == props.id);
-  product = productD;
+  product = productD as IProductData;
 }
 
 const quantity = ref(0);

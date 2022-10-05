@@ -39,11 +39,7 @@ let products = ref([] as ICartItems[]);
 let orderDisabled = ref(true);
 
 const orderDisabledFunction = () => {
-  if (store.state.cart.length > 0) {
-    orderDisabled.value = false;
-  } else {
-    orderDisabled.value = true;
-  }
+  orderDisabled.value = store.state.cart.length > 0 ? false : true;
 };
 
 onBeforeMount(() => {

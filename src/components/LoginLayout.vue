@@ -18,6 +18,7 @@
             placeholder="example@mail.com"
             v-model="user.email"
             required
+            v-focus
           />
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
@@ -54,17 +55,21 @@ import { useRouter } from "vue-router";
 const store = useStore();
 const router = useRouter();
 
+const vFocus = {
+  mounted: (el: any) => el.focus(),
+};
+
 const user = ref({
   email: "",
   password: "",
 });
 
-let msg = ref();
+let msg = ref(false);
 
 const login = () => {
   store.dispatch("login", user.value).then((error) => {
     if (error) {
-      msg.value = error;
+      msg.value = true;
       user.value.password = "";
       return;
     }
